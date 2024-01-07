@@ -1,1 +1,1 @@
-# 스스로 PyTorch 공부하기
+# PyTorch 공부하기
