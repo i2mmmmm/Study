@@ -3,14 +3,14 @@
 입력 데이터와 그에 대응하는 출력 데이터를 기반으로 모델이 예측.
 
 **대표적인 알고리즘**  
-선형 회귀 (Linear Regression)  
-로지스틱 회귀 (Logistic Regression)  
+선형 회귀 (Linear Regression) - 연속적인 값  
+로지스틱 회귀 (Logistic Regression) - 이진분류  
 서포트 벡터 머신 (Support Vector Machine, SVM)  
 나이브 베이즈 (Naive Bayes)  
 의사결정 나무 (Decision Tree)  
-랜덤 포레스트 (Random Forest)  
+랜덤 포레스트 (Random Forest) - 의사결정나무 앙상블  
 k-최근접 이웃 (k-Nearest Neighbors, k-NN)  
-신경망 (Neural Networks)  
+신경망 (Neural Networks) - 뇌구조 모방  
 
 ## 2. 비지도 학습 (Unsupervised Learning)
 레이블이 **없는** 데이터를 사용해 데이터 패턴 찾거나 구조를 학습.  
@@ -50,11 +50,8 @@ PPO (Proximal Policy Optimization)
 여러 모델을 결합하여 더 나은 예측 성능을 얻는 방법.  
 
 **대표적인 알고리즘**  
-배깅 (Bagging)  
-부스팅 (Boosting)  
-AdaBoost  
-Gradient Boosting  
-XGBoost  
+배깅 (Bagging) - 평균, 투표  
+부스팅 (Boosting) - AdaBoost, Gradient Boosting, XGBoost  
 스태킹 (Stacking)  
 
 ## 8. 온라인 학습 (Online Learning)
