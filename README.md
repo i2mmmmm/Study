@@ -1,1 +1,1 @@
-# PyTorch 공부하기
+# Python 공부하기
