@@ -41,3 +41,29 @@
 - 𝑑 는 차분의 수
 - 𝑞 는 이동 평균 항의 수
 - ex) ARIMA(2, 1, 1) 모델은 2차 자기회귀, 1차 차분, 1차 이동 평균 항을 포함
+
+---
+
+### p,d,q 를 찾는 과정 = 최적화
+1. ARIMA 모델을 적용하기 전에 데이터가 정상성 (stationarity)을 갖는지 확인해야 한다.
+   - 정상성 : 데이터의 통계적 특성이 시간에 따라 변하지 않는 것
+   - 정상성을 갖지 않는 데이터는 차분(differencing)을 통해 정상성으로 변환
+   - 정상성 테스트 ADF (Augmented Dickey-Fuller) test, 단위근 테스트 등
+   - 정상성을 갖지 않는 경우 -> 차분 **'d'값 결정** -> 몇 번 차분해야 정상성을 가지는지 확인해서 결정
+2. ACF (Autocorrelation Function) 자기상관분석 -> **'q'값 결정**
+3. PACF (Partial Autocorrelation Function) 부분자기상관분석 -> **'p'값 결정**
+
+```
+from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
+import matplotlib.pyplot as plt
+
+plot_acf(train_values)
+plot_pacf(train_values)
+plt.show()
+```
+
+4. 모델 선택
+   - ACF, PACF plot을 보고 **p,q 초기값 추정**
+   - ACF가 'q'까지 지연된 시점에서 급격히 줄어드는 경우, 그 지연된 시점 = **'q'**
+   - PACF가 'p'까지 지연된 시점에서 급격히 줄어드는 경우, 그 지연된 시점 = **'p'**
+   - p,q,d 를 선정해서 다양한 조합을 시도해 본 후 최적의 모델 선택 -> AIC와 BIC가 낮을수록 좋은 모델
