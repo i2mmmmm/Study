@@ -1,7 +1,8 @@
 ## seasonal_decompose 함수
 ---
-* update 
-  seasonal_decompose 함수는 시계열 데이터 분석의 첫 단계로 사용될 수 있지만,
+* update
+  
+  seasonal_decompose 함수는 시계열 데이터 분석의 첫 단계로 사용될 수 있지만,  
   실제 예측이나 고급 시계열 분석에서는 보다 정교한 방법이 필요하므로  
   STL (Seasonal-Trend Decomposition using LOESS), SEASTS(Seasonal Extraction in ARIMA Time Series) 을  
   사용하는 게 나을지도
