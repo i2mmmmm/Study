@@ -1,6 +1,13 @@
 ## Gemma sprint
 
 
+**Model Summary**  
+This model serves as a youth to talk to a prospective counselor. For this purpose, we fine-tuned the Gemma-2b-it model.  
+
+For more information, visit https://www.kaggle.com/code/mmmmmlee/gemma2-2b-counseling-trainer  
+
+
+
 ```python
 # Install necessary libraries
 !pip install transformers --quiet
