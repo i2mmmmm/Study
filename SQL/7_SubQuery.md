@@ -60,3 +60,29 @@ SupplierName, Country, City,
 ) AS CustomersInTheCity
 FROM Suppliers S;
 ```
+
+
+
+```SELECT
+　productID, productNAME, categoryID, price
+FROM products P1
+WHERE price < (
+	SELECT AVG(price) FROM products P2
+	WHERE P2.categoryID = P1.categoryID
+);
+```
+같은 테이블을 두번 가져옴  
+해당 카테고리의 평균보다 가격이 낮은 것만 가져오겠다.
+
+**EXISTS/ NOT EXISTS**  
+존재하는가 존재하지 않는가
+```
+SELECT categoryID, categoryNAME
+FROM categories C
+WHERE EXISTS (
+　SELECT * FROM products P
+　WHERE P.categoryID = C.categoryID
+　AND P.price>80
+)
+```
+가격이 80이 넘는 것이 존재한다면 가져오기
