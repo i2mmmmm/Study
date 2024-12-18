@@ -1,0 +1,70 @@
+### JOIN 여러 테이블 조립하기
+
+### 1. INNER JOIN 내부조인
+
+INEER JOIN = 양쪽 모두 있는 값 가져오기 
+
+```
+SELECT * FROM CATEGORIES C
+JOIN PRODUCTS P
+ON C.CATEGORY_ID = P.CATEGORY_ID
+```
+그냥 JOIN을 쓰면 기본적으로 INNER JOIN으로 됨
+
+양 쪽 테이블에 모두 있는 열이름은 꼭 앞에 닉네임 붙여줘야 함  
+안그러면 에러난다 - **ambiguous** 모호하다.
+
+
+- 여러 테이블 JOIN 가능
+
+```
+SELECT C.CATEGORY, C.NAME, P.PRODUCT_NAME,
+	O.ORDER_DATE, D.QUANTITY
+FROM CATEGORIES C
+JOIN PRODUCTS P
+ON C.CATEGORY = P.CATEGORY
+JOIN ORDER_DETAIL D
+ON P.PRODUCT_ID = D.PRODUCT_ID
+JOIN ORDERS O
+ON O.ORDER_ID = D.ORDER_ID
+```
+
+- 여러 테이블 JOIN 하고 GROUP도 가능
+```
+SELECT C.NAME, MIN(O.ORDER) AS FIRSTORDER,
+	MAN(O.ORDER) AS LASTORDER,
+	SUM(D.QUANTITY) AS TOTALQUANTITY
+FROM CATEGORIES C
+JOIN PRODUCTS P
+ON C.CATEGORY_ID=P.CATEGORY_ID
+JOIN ORDERDETAIL D
+ON P.PRODUCT_ID = D.PRODUCT_ID
+JOIN ORDERS O
+ON O.ORDER_ID = D.ORDER_ID
+GROUP BY C.CATEGORY_ID, P.PRODUCT_ID
+```
+
+- SELF JOIN
+```
+SELECT
+	E1.EMPLOYEE_ID, CONCAT_WS(' ', E1.FIRST_NAME, E1.LAST_NAME) AS EMPLOYEE,
+	E2.EMPLOYEE_ID, CONCAT_WS(' ', E2.FIRST_NAME, E2.LAST_NAME) AS NEXTEMPLOYEE
+
+FROM EMPLOYEES E1 JOIN EMPLOYEES E2
+ON E1.EMPLOYEE_ID +1 = E2.EMPLOYEE_ID
+```
+각 employee마다 그 다음 번호 employee 도 알고 싶어서 뒤에 붙이는 것
+
+### 2. LEFT,RIGHT OUTER JOIN
+
+그럼 E1 의 마지막 번호와 E2의 첫번째 번호는 안나오는데  
+이유는 INNER 라서, 나오게 하고 싶으면  
+**LEFT(E1 마지막나오게), RIGHT(E2 첫번째 나오게)** 중 골라쓰면 되는데  
+그 때 NULL 값이 생기니까  
+IFNULL( E1.EMPLOYEE_ID , 'N' ) 이런 식으로 써주면 채울 수 있음
+
+- OUTER 라는 글씨는 생략 가능하고,
+- FULL OUTER 가 MySQL에는 없어서 LEFT, RIGHT 를 UNION 해서 만들어야 함
+
+### 3. CROSS JOIN
+왼쪽 테이블 모두 x 오른쪽 테이블 모두
